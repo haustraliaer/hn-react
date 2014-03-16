@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+// yeeyeyey
+
 var React    = window.React = require('react'), // assign it to winow for react chrome extension
 
     Header   = require('./header'),

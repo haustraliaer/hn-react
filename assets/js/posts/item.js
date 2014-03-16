@@ -4,6 +4,8 @@ var React = require('react'),
     Footer,
     Item;
 
+console.log('yamum');
+
 Footer = React.createClass({
     render: function () {
         var post = this.props.post;
@@ -18,7 +20,7 @@ Item = React.createClass({
     render: function () {
         var post = this.props.post;
         return <li>
-            <a href={post.url}>{post.title}</a>
+            <a href={post.url} target="_blank">{post.title}</a>
             <Footer post={post}/>
        </li>;
     }
