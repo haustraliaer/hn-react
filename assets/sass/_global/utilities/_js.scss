@@ -1,0 +1,44 @@
+
+// put all your js utilities here...
+
+.hidden_after {
+  visibility: hidden;
+  opacity: 0;
+  height: 0px;
+  position: fixed;
+}
+
+
+#js__media-check {
+  
+  -webkit-transition: width .001s;
+  -moz-transition: width .001s;
+  -ms-transition: width .001s;
+  -o-transition: width .001s;
+  transition: width .001s;
+
+  width: 10px;
+
+  @include breakpoint(portrait) {
+    width: 20px;
+  }
+
+  @include breakpoint(landscape) {
+    width: 30px;
+  }
+
+  &:after {
+    
+    @extend .hidden_after;
+    
+    content: "mobile";
+
+    @include breakpoint(portrait) {
+      content: "portrait";
+    }
+
+    @include breakpoint(landscape) {
+      content: "landscape";
+    }
+  }
+}

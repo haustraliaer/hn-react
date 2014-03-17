@@ -1,0 +1,44 @@
+
+
+// The old cbf file...
+
+
+.app__wrapper {
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.logo {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  font-size: 18px;
+  color: #e3732d;
+}
+
+.posts {
+  li {
+      color: #e3732d;
+      padding-bottom: 20px;
+    a {
+      display: block;
+      color: #e3732d;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    small {
+      color: #cbd0d4;
+      a {
+        display: inline;
+        color: #afb4b8;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

@@ -24,7 +24,7 @@ var livereload = function (evt, filepath) {
 // gulp tasks
  
 gulp.task('styles', function () {
-  return gulp.src('./assets/sass/style.scss')
+  return gulp.src('./assets/sass/styles.scss')
   .pipe(sass())
   .pipe(gulp.dest('./build/css/'));
 });
