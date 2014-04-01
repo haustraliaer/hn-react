@@ -4,6 +4,8 @@ var React = require('react'),
   Footer,
   Item;
 
+  console.log('blah');
+
 Footer = React.createClass({
   render: function () {
     var post = this.props.post;

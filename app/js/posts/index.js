@@ -6,11 +6,6 @@ var React = require('react'),
 
   List;
 
-
-
-// var backup = window.location + 'backup-data.json';
-// console.log(backup);
-
 List = React.createClass({
   getInitialState: function () {
     return { posts: [] };
@@ -18,18 +13,6 @@ List = React.createClass({
   componentWillMount: function () {
       this.fetchLatestNews();
   },
-  // componentWillMount: function() {
-  //   $.ajax({
-  //     url: this.props.url,
-  //     dataType: 'json',
-  //     success: function(data) {
-  //     this.setState({data: data});
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-  //     console.error(this.props.url, status, err.toString());
-  //     }.bind(this)
-  //   });
-  // },
   fetchLatestNews: function () {
     $.ajax({
       url:       'http://api.ihackernews.com/page',
@@ -46,10 +29,9 @@ List = React.createClass({
       }.bind(this)
     });
   },
-
   fetchbackupData: function() {
     $.ajax({
-      url:       'backup-data.json',
+      url:       'assets/data/backup-data.json',
       dataType:  'json',
       data:      { format: 'json' },
 
@@ -62,7 +44,6 @@ List = React.createClass({
       }.bind(this)
     });
   },
-
   render: function () {
     return <ol className="posts">
       {this.state.posts.map(function (post) {

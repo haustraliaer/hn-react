@@ -1,66 +1,85 @@
 
-var gutil       = require('gulp-util'),
-    sass        = require('gulp-sass'),
-    lr          = require('tiny-lr'),
-    http        = require('http'),
-    path        = require('path'),
-    ecstatic    = require('ecstatic'),
-    gulp        = require('gulp'),
-    browserify  = require('gulp-browserify'),
-    concat      = require('gulp-concat'),
-    imagemin    = require('gulp-imagemin');
-
-
-var tlr = lr();
-var livereload = function (evt, filepath) {
-  tlr.changed({
-  body: {
-    files: path.relative(__dirname, filepath)
-  }
-  });
-};
-
-
-// gulp tasks
+var gutil           = require('gulp-util'),
+    sass            = require('gulp-sass'),
+    gulp            = require('gulp'),
+    browserify      = require('gulp-browserify'),
+    concat          = require('gulp-concat'),
+    imagemin        = require('gulp-imagemin'),
+    embedlr         = require('gulp-embedlr'),
+    refresh         = require('gulp-livereload'),
+    lrserver        = require('tiny-lr')(),
+    express         = require('express'),
+    livereload      = require('connect-livereload'),
+    livereloadport  = 35729,
+    serverport      = 8080;
  
-gulp.task('styles', function () {
-  return gulp.src('./assets/sass/styles.scss')
-  .pipe(sass())
-  .pipe(gulp.dest('./build/css/'));
+// server --------------------------------- //
+
+var server = express();
+
+server.use(livereload({
+  port: livereloadport
+}));
+
+server.use(express.static('./build'));
+
+gulp.task('serve', function() {
+  server.listen(serverport);
+  lrserver.listen(livereloadport);
 });
 
-gulp.task('scripts', function () {
-  gulp.src(['./assets/js/app.js'])
+
+// main tasks ------------------------------ //
+
+gulp.task('styles', function(){
+  gulp.src('./app/sass/styles.scss')
+    .pipe(sass({sourceComments: 'map'}))
+    .pipe(gulp.dest('./build/css/'))
+    .pipe(refresh(lrserver));
+});
+
+gulp.task('scripts', function(){
+  gulp.src(['./app/js/app.js'])
     .pipe(browserify({
       debug: true,
       transform: [ 'reactify' ]
     }))
-    .pipe(gulp.dest('./build/js/'));
+    .pipe(gulp.dest('./build/js/'))
+    .pipe(refresh(lrserver));
 });
-
-gulp.task('images', function () {
-  gulp.src(['./assets/img/**/*.png', './assets/img/**/*.gif'])
-    .pipe(imagemin())
-    .pipe(gulp.dest('./build/img/'));
+ 
+gulp.task('html', function(){
+  gulp.src('./app/index.html')
+    .pipe(gulp.dest('./build/'))
+    .pipe(refresh(lrserver));
 });
+ 
+gulp.task('assets', function(){
+  gulp.src('./app/assets/**/*')
+    .pipe(gulp.dest('./build/assets/'))
+    .pipe(refresh(lrserver));
+});
+ 
 
-
-// default task
-
+// watch ---------------------------------- //
+ 
 gulp.task('watch', function() {
-
-
-  http.createServer(ecstatic({root: __dirname})).listen(8080);
-  gutil.log(gutil.colors.blue('HTTP server listening on port 8080'));
-
-  tlr.listen(35729);
-  gutil.log(gutil.colors.blue('Livereload server listening on port 35729'));
-
-  gulp.watch('assets/sass/**', ['styles'])._watcher.on('all', livereload);
-  gulp.watch('assets/js/**', ['scripts'])._watcher.on('all', livereload);
-  gulp.watch('assets/img/**', ['images'])._watcher.on('all', livereload);
+ 
+  gulp.watch('app/sass/**', ['styles']);
+  gulp.watch('app/js/**', ['scripts']);
+  gulp.watch('app/assets/**', ['assets']);
+  gulp.watch('app/index.html', ['html']);
 
 });
 
-gulp.task('default', [ 'styles', 'scripts', 'images', 'watch' ]);
+// build ---------------------------------- //
+
+gulp.task('build', ['html', 'scripts', 'styles', 'assets']);
+
+// gulp ---------------------------------- //
+ 
+gulp.task('default', ['scripts', 'styles', 'html', 'assets', 'serve', 'watch']);
+
+
+
 
