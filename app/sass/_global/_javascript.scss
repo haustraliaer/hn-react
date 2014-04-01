@@ -1,13 +1,20 @@
 
-// put all your js utilities here...
 
-.hidden_after {
+
+// Any necessary js styling should go here
+// ------------------------------------------------------------------------------------ 
+
+
+// placeholder to hide content without display: none;
+
+%hidden_after {
   visibility: hidden;
   opacity: 0;
   height: 0px;
   position: fixed;
 }
 
+// Element for checking and updating the current breakpoint in javascript
 
 #js__media-check {
   
@@ -29,7 +36,7 @@
 
   &:after {
     
-    @extend .hidden_after;
+    @extend %hidden_after;
     
     content: "mobile";
 
@@ -42,3 +49,5 @@
     }
   }
 }
+
+

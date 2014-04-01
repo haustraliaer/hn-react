@@ -4,7 +4,6 @@ var gutil           = require('gulp-util'),
     gulp            = require('gulp'),
     browserify      = require('gulp-browserify'),
     concat          = require('gulp-concat'),
-    imagemin        = require('gulp-imagemin'),
     embedlr         = require('gulp-embedlr'),
     refresh         = require('gulp-livereload'),
     lrserver        = require('tiny-lr')(),
@@ -32,7 +31,7 @@ gulp.task('serve', function() {
 // main tasks ------------------------------ //
 
 gulp.task('styles', function(){
-  gulp.src('./app/sass/styles.scss')
+  gulp.src('./app/sass/application.scss')
     .pipe(sass({sourceComments: 'map'}))
     .pipe(gulp.dest('./build/css/'))
     .pipe(refresh(lrserver));

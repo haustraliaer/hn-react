@@ -1,10 +1,17 @@
 
-// font family
+
+
+// Global style variables
+// ------------------------------------------------------------------------------------ 
+
+
+// font family - update these when external fonts are setup
 
 $sans:   sans-serif;
 $serif:  serif;
 
-// font weight
+
+// font weights should be descriptive
 
 $light:     300;
 $roman:     400;
@@ -12,24 +19,32 @@ $medium:    500;
 $semibold:  600;
 $bold:      700;
 
-// font sizes
+
+// font sizes generally used on the html element and some mixins
 
 $base_font_size: 16px;
 $base_line_height: 1.5;
 
-// colours (for reset)
+
+// Sometimes abstract terms are useful:
 
 $foreground:          #625e4f;
 $background:          #FDFDFD;
-$focus_color:       #4fa1fd;
-$alert_color:       #fd9833;
-$link_color:        #777770;
-$hover_color:       #282828;
 
-// colours (for boilerplate) 
+$focus_color:         #4fa1fd;
+$alert_color:         #fd9833;
 
-$gold: #b29863;
-$light-gold: #c6c17f;
-$silver: #737373;
-$light-silver: #f0f0f0;
-$light-yellow: #ede2a9;
+
+// But most colour variables should use obvious names (green, red, etc..)
+
+$gold:           #b29863;
+$light-gold:     #c6c17f;
+
+$silver:         #737373;
+$light-silver:   #f0f0f0;
+
+$yellow:         #dcc442;
+$light-yellow:   #ede2a9;
+
+
+

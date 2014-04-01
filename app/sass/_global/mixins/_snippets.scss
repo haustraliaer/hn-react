@@ -1,5 +1,9 @@
 
-// Snippets of code that are too complex / annoying to remember.
+
+
+// Simple snippet mixins for quick re-use
+// ---------------------------------------------------------------------------------------
+
 
 // clear floats
 
@@ -15,6 +19,7 @@
     }
 }
 
+
 // Truncate text if it runs over the width...
 
 @mixin ellipsis() {
@@ -24,6 +29,7 @@
   -o-text-overflow: ellipsis;
 }
 
+
 // Stretchy element for 'media-object' layout behaviour
 
 @mixin media-obj() {
@@ -31,6 +37,7 @@
   _overflow:visible; 
   zoom:1;
 }
+
 
 // stop users from highlighting text
 
@@ -43,12 +50,14 @@
   user-select: none;
 }
 
+
 // get rid of z-index glitching
 
 @mixin noZ() {
   -webkit-transform: translateZ(0px);
   transform: translateZ(0px);
 }
+
 
 // wrap words that extend beyond their container
 
@@ -63,8 +72,11 @@
   word-wrap: break-word;      /* IE 5+ */
 }
 
+
 // create generic tab focus highlights
 
 @mixin tabfocus() {
   outline: 2px solid $focus_color;
 }
+
+
